@@ -1,0 +1,30 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="etong.simiquan.MyActivity2">
+<!-- 
+    <include layout="@layout/list_item"
+        android:id="@+id/headview"/> -->
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editText"
+        android:layout_below="@+id/headview"
+        android:background="@color/white"
+        android:fadingEdge="none" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="8dp"
+        android:id="@+id/editText"
+        android:background="#d6d6d6"
+        android:hint="请输入评论"
+        android:layout_alignParentBottom="true"/>
+
+
+</RelativeLayout>
