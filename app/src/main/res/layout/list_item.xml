@@ -7,76 +7,68 @@
     android:paddingLeft="8dp">
 
     <ImageView
+        android:id="@+id/backgroundImageView"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:id="@+id/imageView"
-        android:scaleType="centerCrop"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignBottom="@+id/imageView"
+        android:layout_alignBottom="@+id/backgroundImageView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="@color/transparent"
-        >
+        android:background="@color/transparent">
 
         <TextView
+            android:id="@+id/commentNumTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/commentImageView"
             android:text="2"
-            android:layout_marginLeft="8dp"
-            android:layout_toRightOf="@+id/imageView2"
-            android:layout_centerVertical="true"
-            android:textColor="@color/white"
-            android:id="@+id/textView" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white" />
 
         <ImageView
+            android:id="@+id/commentImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView2"
-            android:src="@drawable/comment"
+            android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="8dp"
-            android:layout_alignParentLeft="true" />
+            android:src="@drawable/comment" />
 
         <ImageView
+            android:id="@+id/favorImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView3"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/textView"
-            android:layout_toEndOf="@+id/textView"
             android:layout_marginLeft="16dp"
-            android:src="@drawable/heart"/>
+            android:layout_toRightOf="@+id/commentNumTextView"
+            android:src="@drawable/heart" />
 
         <TextView
+            android:id="@+id/favorNumTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="30"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="8dp"
-            android:layout_toRightOf="@+id/imageView3"
-            android:layout_centerVertical="true"
-            android:textColor="@color/white"
-            android:id="@+id/textView2" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:paddingTop="8dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:layout_toRightOf="@+id/favorImageView"
+            android:text="30"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=". . ."
-            android:id="@+id/textView3"
-            android:textColor="@color/white"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
+            android:textColor="@color/white" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:background="@color/transparent"/>
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@color/transparent" />
 
     </RelativeLayout>
 </RelativeLayout>

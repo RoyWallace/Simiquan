@@ -83,7 +83,7 @@ public class MyActivity2 extends Activity {
             Log.i("etong", "relayout null ");
         }
 
-        ImageView imageView = (ImageView)findViewById(R.id.imageView);
+        ImageView imageView = (ImageView)findViewById(R.id.backgroundImageView);
         imageView.setImageResource(imageId);
         listView = (LinearListView) findViewById(R.id.listView);
 //        listView.addHeaderView(relayout);

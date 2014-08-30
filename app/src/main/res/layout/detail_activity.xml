@@ -6,7 +6,7 @@
     android:background="@color/white"
     tools:context=".MyActivity2">
 
-    <include layout="@layout/image_list_view"
+    <etong.simiquan.SmartisanView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/editText"/>
