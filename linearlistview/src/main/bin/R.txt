@@ -1,0 +1,4 @@
+int attr dividerThickness 0x7f010000
+int[] styleable LinearListView { 0x010100b2, 0x7f010000 }
+int styleable LinearListView_android_entries 0
+int styleable LinearListView_dividerThickness 1

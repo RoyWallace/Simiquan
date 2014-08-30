@@ -17,7 +17,6 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -78,7 +77,7 @@ public class MyActivity2 extends Activity {
 	public void findAllView() {
 
 		LayoutInflater inflater = LayoutInflater.from(this);
-		contentView = inflater.inflate(R.layout.activity_my_activity2, null);
+		contentView = inflater.inflate(R.layout.detail_activity, null);
 		setContentView(contentView);
 
 		relayout = (RelativeLayout) (inflater.inflate(R.layout.list_item, null));

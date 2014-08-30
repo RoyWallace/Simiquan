@@ -40,7 +40,7 @@ public class CommentAdapter extends BaseAdapter {
 	public View getView(int position, View view, ViewGroup parent) {
 
 		if (view == null) {
-			view = ((Activity) context).getLayoutInflater().inflate(R.layout.comment_item, null);
+			view = ((Activity) context).getLayoutInflater().inflate(R.layout.comment_item,parent, false);
 		}
 		TextView textView = (TextView) view;
 		textView.setText(strs.get(position));

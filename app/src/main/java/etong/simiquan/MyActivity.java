@@ -27,7 +27,7 @@ public class MyActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my);
+        setContentView(R.layout.my_activity);
         
         findAllView();
         stowData();
@@ -44,7 +44,6 @@ public class MyActivity extends ActionBarActivity {
     	
     	for(int i=0;i<10;i++){
     		int num=(int)(Math.random()*(resIds.length));
-    		Log.i("etong", "num: "+num);
     		imageIdList.add(resIds[num]);
     	}
     	
@@ -65,7 +64,7 @@ public class MyActivity extends ActionBarActivity {
                 intent.putExtra("imageId", imageIdList.get(i));
 
                 startActivity(intent);
-                overridePendingTransition(R.anim.nothing,R.anim.abc_slide_out_top);
+//                overridePendingTransition(R.anim.nothing,R.anim.abc_slide_out_top);
             }
         });
     }

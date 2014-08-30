@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Simiquan.iml" filepath="$PROJECT_DIR$/Simiquan.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/linearlistview/linearlistview.iml" filepath="$PROJECT_DIR$/linearlistview/linearlistview.iml" />
     </modules>
   </component>
 </project>

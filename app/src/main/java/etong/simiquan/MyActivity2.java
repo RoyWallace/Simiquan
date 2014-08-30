@@ -14,15 +14,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 
+import com.linearlistview.LinearListView;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.animation.ObjectAnimator;
@@ -35,7 +31,7 @@ public class MyActivity2 extends Activity {
 
     private EditText editText;
 
-    private ListView listView;
+    private LinearListView listView;
 
     private float density;
     int offsetY;
@@ -79,16 +75,18 @@ public class MyActivity2 extends Activity {
     public void findAllView() {
 
         LayoutInflater inflater = LayoutInflater.from(this);
-        contentView = inflater.inflate(R.layout.activity_my_activity2, null);
+        contentView = inflater.inflate(R.layout.detail_activity, null);
         setContentView(contentView);
 
-        relayout = (RelativeLayout) (inflater.inflate(R.layout.list_item, null));
+        relayout = (RelativeLayout)findViewById(R.id.headView);
+        if(relayout == null) {
+            Log.i("etong", "relayout null ");
+        }
 
-        ImageView imageView = (ImageView) (relayout
-                .findViewById(R.id.imageView));
+        ImageView imageView = (ImageView)findViewById(R.id.imageView);
         imageView.setImageResource(imageId);
-        listView = (ListView) findViewById(R.id.listView);
-        listView.addHeaderView(relayout);
+        listView = (LinearListView) findViewById(R.id.listView);
+//        listView.addHeaderView(relayout);
 
         editText = (EditText) findViewById(R.id.editText);
 
@@ -118,6 +116,7 @@ public class MyActivity2 extends Activity {
         relayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.i("etong","click");
                 doEndAnim();
             }
         });

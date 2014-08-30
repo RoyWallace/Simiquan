@@ -3,18 +3,13 @@
     android:id="@+id/rootview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context="etong.simiquan.MyActivity2">
-<!-- 
-    <include layout="@layout/list_item"
-        android:id="@+id/headview"/> -->
+    android:background="@color/white"
+    tools:context=".MyActivity2">
 
-    <ListView
-        android:id="@+id/listView"
+    <include layout="@layout/image_list_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/editText"
-        android:background="@color/white"
-        android:fadingEdge="none" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/editText"/>
 
     <EditText
         android:layout_width="match_parent"
