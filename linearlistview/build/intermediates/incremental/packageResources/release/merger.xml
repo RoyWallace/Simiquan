@@ -2,9 +2,9 @@
 <merger version="2" >
 
     <dataSet config="main" >
-        <source path="D:\work\github\Simiquan\linearlistview\src\main\res" >
+        <source path="E:\github\Simiquan\linearlistview\src\main\res" >
             <file
-                path="D:\work\github\Simiquan\linearlistview\src\main\res\values\attrs.xml"
+                path="E:\github\Simiquan\linearlistview\src\main\res\values\attrs.xml"
                 qualifiers="" >
                 <declare-styleable name="LinearListView" >
                     <attr name="android:entries" />
@@ -14,11 +14,11 @@
                 </declare-styleable>
             </file>
         </source>
-        <source path="D:\work\github\Simiquan\linearlistview\build\generated\res\rs\release" />
-        <source path="D:\work\github\Simiquan\linearlistview\build\generated\res\generated\release" />
+        <source path="E:\github\Simiquan\linearlistview\build\generated\res\rs\release" />
+        <source path="E:\github\Simiquan\linearlistview\build\generated\res\generated\release" />
     </dataSet>
     <dataSet config="release" >
-        <source path="D:\work\github\Simiquan\linearlistview\src\release\res" />
+        <source path="E:\github\Simiquan\linearlistview\src\release\res" />
     </dataSet>
 
 </merger>
