@@ -78,7 +78,7 @@ public class PullToZoomListView extends ListView implements
         this.mHeaderImage = new ImageView(paramContext);
         int i = localDisplayMetrics.widthPixels;
         Log.i("etong", "i: " + i);
-        setHeaderViewSize(i, 350);
+        setHeaderViewSize(i, 450);
         this.mShadow = new ImageView(paramContext);
         FrameLayout.LayoutParams localLayoutParams = new FrameLayout.LayoutParams(
                 -1, -2);
@@ -135,26 +135,30 @@ public class PullToZoomListView extends ListView implements
     protected void onLayout(boolean paramBoolean, int paramInt1, int paramInt2,
                             int paramInt3, int paramInt4) {
         super.onLayout(paramBoolean, paramInt1, paramInt2, paramInt3, paramInt4);
-        if (this.mHeaderHeight == 0)
+        if (this.mHeaderHeight == 0) {
+            Log.i("etong","set headerHeight");
             this.mHeaderHeight = this.mHeaderContainer.getHeight();
+        }
         if (mHeaderImageCloner == null) {
             mHeaderImageCloner = new ImageView(getContext());
             mHeaderImageCloner.setScaleType(ImageView.ScaleType.CENTER_CROP);
             mHeaderImageCloner.layout(0, 0, mHeaderImage.getWidth(), titlebarHeight);
-            mHeaderImageCloner.setImageResource(mImageRes);
+            mHeaderImageCloner.setImageResource(R.drawable.tu1);
         }
     }
 
     @Override
     public void onScroll(AbsListView paramAbsListView, int paramInt1,
                          int paramInt2, int paramInt3) {
-        Log.d("etong", "onScroll");
+        Log.i("etong","scroll");
         float f = this.mHeaderHeight - this.mHeaderContainer.getBottom();
         if ((f > 0.0F) && (f < this.mHeaderHeight)) {
             int i = (int) (0.5D * f);
-            this.mHeaderImage.scrollTo(0, -i);
-        } else if (this.mHeaderImage.getScrollY() != 0) {
-            this.mHeaderImage.scrollTo(0, 0);
+            Log.i("etong","to: "+i);
+            this.mHeaderContainer.scrollTo(0, -i);
+        } else if (this.mHeaderContainer.getScrollY() != 0) {
+            this.mHeaderContainer.scrollTo(0, 0);
+            Log.i("etong","to  0 ");
         }
         if (this.mOnScrollListener != null) {
             this.mOnScrollListener.onScroll(paramAbsListView, paramInt1,
@@ -186,27 +190,46 @@ public class PullToZoomListView extends ListView implements
                 } else {
                     if (this.mLastMotionY == -1.0F)
                         this.mLastMotionY = me.getY(j);
-                    if (this.mHeaderContainer.getBottom() >= this.mHeaderHeight) {
+                    Log.i("etong","bottom: "+mHeaderContainer.getBottom());
+                    Log.i("etong","mHeaderHeight: "+mHeaderHeight);
+//                    if (this.mHeaderContainer.getBottom() >= this.mHeaderHeight) {
+//                        ViewGroup.LayoutParams localLayoutParams = this.mHeaderContainer
+//                                .getLayoutParams();
+//                        float f = ((me.getY(j) - this.mLastMotionY + this.mHeaderContainer
+//                                .getBottom()) / this.mHeaderHeight - this.mLastScale)
+//                                / 2.0F + this.mLastScale;
+//                        if ((this.mLastScale <= 1.0D) && (f < this.mLastScale)) {
+//                            Log.i("etong","lastScale<=1 f<lastScale");
+//                            localLayoutParams.height = this.mHeaderHeight;
+//                            this.mHeaderContainer
+//                                    .setLayoutParams(localLayoutParams);
+//                            return super.onTouchEvent(me);
+//                        }
+//                        this.mLastScale = Math.min(Math.max(f, 1.0F),
+//                                this.mMaxScale);
+//                        localLayoutParams.height = ((int) (this.mHeaderHeight * this.mLastScale));
+//                        if (localLayoutParams.height < this.mScreenHeight)
+//                            this.mHeaderContainer
+//                                    .setLayoutParams(localLayoutParams);
+//                        this.mLastMotionY = me.getY(j);
+//                        Log.i("etong","return true");
+//
+//                        return true;
+//                    }
+
+
+                    if(this.mHeaderContainer.getBottom() >= this.mHeaderHeight){
                         ViewGroup.LayoutParams localLayoutParams = this.mHeaderContainer
                                 .getLayoutParams();
-                        float f = ((me.getY(j) - this.mLastMotionY + this.mHeaderContainer
-                                .getBottom()) / this.mHeaderHeight - this.mLastScale)
-                                / 2.0F + this.mLastScale;
-                        if ((this.mLastScale <= 1.0D) && (f < this.mLastScale)) {
-                            localLayoutParams.height = this.mHeaderHeight;
-                            this.mHeaderContainer
-                                    .setLayoutParams(localLayoutParams);
-                            return super.onTouchEvent(me);
-                        }
-                        this.mLastScale = Math.min(Math.max(f, 1.0F),
-                                this.mMaxScale);
-                        localLayoutParams.height = ((int) (this.mHeaderHeight * this.mLastScale));
-                        if (localLayoutParams.height < this.mScreenHeight)
+                        localLayoutParams.height = localLayoutParams.height+(int)(me.getY()-mLastMotionY);
+
+                        if (localLayoutParams.height < 600)
                             this.mHeaderContainer
                                     .setLayoutParams(localLayoutParams);
                         this.mLastMotionY = me.getY(j);
                         return true;
                     }
+
                     this.mLastMotionY = me.getY(j);
                 }
                 break;

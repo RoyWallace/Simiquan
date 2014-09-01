@@ -133,17 +133,7 @@ public class LollipopView extends ListView implements
         if (this.mHeaderHeight == 0)
             this.mHeaderHeight = this.mHeaderContainer.getHeight();
         Log.i("etong","mHeaderHeight: "+mHeaderHeight);
-    }
 
-    @Override
-    protected void dispatchDraw(Canvas canvas) {
-        super.dispatchDraw(canvas);
-        if(mHeaderContainer.getHeight() <= 200) {
-
-            if (mHeaderImage != null) {
-                drawChild(canvas, mHeaderImage, getDrawingTime());
-            }
-        }
     }
 
     @Override
@@ -196,22 +186,34 @@ public class LollipopView extends ListView implements
                 } else {
                     if (this.mLastMotionY == -1.0F)
                         this.mLastMotionY = paramMotionEvent.getY(j);
-                    if (this.mHeaderContainer.getBottom() >= this.mHeaderHeight) {
+//                    if (this.mHeaderContainer.getBottom() >= this.mHeaderHeight) {
+//                        ViewGroup.LayoutParams localLayoutParams = this.mHeaderContainer
+//                                .getLayoutParams();
+//                        float f = ((paramMotionEvent.getY(j) - this.mLastMotionY + this.mHeaderContainer
+//                                .getBottom()) / this.mHeaderHeight - this.mLastScale)
+//                                / 2.0F + this.mLastScale;
+//                        if ((this.mLastScale <= 1.0D) && (f < this.mLastScale)) {
+//                            localLayoutParams.height = this.mHeaderHeight;
+//                            this.mHeaderContainer
+//                                    .setLayoutParams(localLayoutParams);
+//                            return super.onTouchEvent(paramMotionEvent);
+//                        }
+//                        this.mLastScale = Math.min(Math.max(f, 1.0F),
+//                                this.mMaxScale);
+//                        localLayoutParams.height = ((int) (this.mHeaderHeight * this.mLastScale));
+//                        if (localLayoutParams.height < this.mScreenHeight)
+//                            this.mHeaderContainer
+//                                    .setLayoutParams(localLayoutParams);
+//                        this.mLastMotionY = paramMotionEvent.getY(j);
+//                        return true;
+//                    }
+                    if(this.mHeaderContainer.getBottom() >= this.mHeaderHeight){
                         ViewGroup.LayoutParams localLayoutParams = this.mHeaderContainer
                                 .getLayoutParams();
-                        float f = ((paramMotionEvent.getY(j) - this.mLastMotionY + this.mHeaderContainer
-                                .getBottom()) / this.mHeaderHeight - this.mLastScale)
-                                / 2.0F + this.mLastScale;
-                        if ((this.mLastScale <= 1.0D) && (f < this.mLastScale)) {
-                            localLayoutParams.height = this.mHeaderHeight;
-                            this.mHeaderContainer
-                                    .setLayoutParams(localLayoutParams);
-                            return super.onTouchEvent(paramMotionEvent);
-                        }
-                        this.mLastScale = Math.min(Math.max(f, 1.0F),
-                                this.mMaxScale);
-                        localLayoutParams.height = ((int) (this.mHeaderHeight * this.mLastScale));
-                        if (localLayoutParams.height < this.mScreenHeight)
+                        Log.i("etong","height: "+localLayoutParams.height);
+                        localLayoutParams.height = mHeaderContainer.getHeight()+(int)(paramMotionEvent.getY()-mLastMotionY);
+
+                        if (localLayoutParams.height < 600)
                             this.mHeaderContainer
                                     .setLayoutParams(localLayoutParams);
                         this.mLastMotionY = paramMotionEvent.getY(j);
