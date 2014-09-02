@@ -2,10 +2,10 @@
 <merger version="2" >
 
     <dataSet config="main" >
-        <source path="E:\github\Simiquan\linearlistview\src\main\assets" />
+        <source path="D:\work\github\Simiquan\linearlistview\src\main\assets" />
     </dataSet>
     <dataSet config="release" >
-        <source path="E:\github\Simiquan\linearlistview\src\release\assets" />
+        <source path="D:\work\github\Simiquan\linearlistview\src\release\assets" />
     </dataSet>
 
 </merger>
