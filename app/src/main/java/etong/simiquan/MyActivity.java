@@ -55,7 +55,7 @@ public class MyActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Intent intent = new Intent(new Intent(MyActivity.this,MyActivity3.class));
+                Intent intent = new Intent(new Intent(MyActivity.this,MyActivity5.class));
                 int[] location = new int[2];
                 view.getLocationOnScreen(location);
                 intent.putExtra("offsetHeight", view.getHeight());

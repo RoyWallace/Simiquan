@@ -58,9 +58,9 @@ public class LollipopView extends ListView implements
     }
 
     private void endScraling() {
-        if (this.mHeaderContainer.getBottom() >= this.mHeaderHeight)
+        if (mHeaderContainer.getBottom() >= mHeaderHeight)
             Log.d("mmm", "endScraling");
-        this.mScalingRunnalable.startAnimation(200L);
+        mScalingRunnalable.startAnimation(200L);
     }
 
     private void init(Context paramContext) {
@@ -68,59 +68,59 @@ public class LollipopView extends ListView implements
         if(!isInEditMode())
         ((Activity) paramContext).getWindowManager().getDefaultDisplay()
                 .getMetrics(localDisplayMetrics);
-        this.mScreenHeight = localDisplayMetrics.heightPixels;
-//        this.mHeaderContainer = new RelativeLayout(paramContext);
-//        this.mHeaderContainer.setBackgroundResource(R.color.black);
-//        this.mHeaderImage = new ImageView(paramContext);
+        mScreenHeight = localDisplayMetrics.heightPixels;
+//        mHeaderContainer = new RelativeLayout(paramContext);
+//        mHeaderContainer.setBackgroundResource(R.color.black);
+//        mHeaderImage = new ImageView(paramContext);
 //        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 //        lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
 //        LayoutInflater inflater = (LayoutInflater) paramContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 //        inflater.inflate(R.layout.image_list_view, this);
-//        this.mHeaderContainer = (RelativeLayout) findViewById(R.id.headView);
-//        this.mHeaderImage = (ImageView) findViewById(R.id.backgroundImageView);
+//        mHeaderContainer = (RelativeLayout) findViewById(R.id.headView);
+//        mHeaderImage = (ImageView) findViewById(R.id.backgroundImageView);
 
 //        int i = localDisplayMetrics.widthPixels;
 //        setHeaderViewSize(i, (int) (9.0F * (i / 16.0F)));
-//        this.mShadow = new ImageView(paramContext);
+//        mShadow = new ImageView(paramContext);
 //        FrameLayout.LayoutParams localLayoutParams = new FrameLayout.LayoutParams(
 //                -1, -2);
 //        localLayoutParams.gravity = 80;
-//        this.mShadow.setLayoutParams(localLayoutParams);
-//        this.mHeaderContainer.addView(this.mHeaderImage,lp);
-//        this.mHeaderContainer.addView(this.mShadow);
-//        addHeaderView(this.mHeaderContainer);
-        this.mScalingRunnalable = new ScalingRunnalable();
+//        mShadow.setLayoutParams(localLayoutParams);
+//        mHeaderContainer.addView(mHeaderImage,lp);
+//        mHeaderContainer.addView(mShadow);
+//        addHeaderView(mHeaderContainer);
+        mScalingRunnalable = new ScalingRunnalable();
         super.setOnScrollListener(this);
     }
 
     private void onSecondaryPointerUp(MotionEvent paramMotionEvent) {
         int i = (paramMotionEvent.getAction()) >> 8;
-        if (paramMotionEvent.getPointerId(i) == this.mActivePointerId)
+        if (paramMotionEvent.getPointerId(i) == mActivePointerId)
             if (i != 0) {
                 int j = 1;
-                this.mLastMotionY = paramMotionEvent.getY(0);
-                this.mActivePointerId = paramMotionEvent.getPointerId(0);
+                mLastMotionY = paramMotionEvent.getY(0);
+                mActivePointerId = paramMotionEvent.getPointerId(0);
                 return;
             }
     }
 
     private void reset() {
-        this.mActivePointerId = -1;
-        this.mLastMotionY = -1.0F;
-        this.mMaxScale = -1.0F;
-        this.mLastScale = -1.0F;
+        mActivePointerId = -1;
+        mLastMotionY = -1.0F;
+        mMaxScale = -1.0F;
+        mLastScale = -1.0F;
     }
 
     @Override
     public void addHeaderView(View v) {
         super.addHeaderView(v);
-        this.mHeaderContainer = (RelativeLayout) v;
-        this.mHeaderContainer.setBackgroundResource(R.color.black);
-        this.mHeaderImage = (ImageView) v.findViewById(R.id.backgroundImageView);
+        mHeaderContainer = (RelativeLayout) v;
+        mHeaderContainer.setBackgroundResource(R.color.black);
+        mHeaderImage = (ImageView) v.findViewById(R.id.backgroundImageView);
     }
 
     public ImageView getHeaderView() {
-        return this.mHeaderImage;
+        return mHeaderImage;
     }
 
     public boolean onInterceptTouchEvent(MotionEvent paramMotionEvent) {
@@ -130,135 +130,113 @@ public class LollipopView extends ListView implements
     protected void onLayout(boolean paramBoolean, int paramInt1, int paramInt2,
                             int paramInt3, int paramInt4) {
         super.onLayout(paramBoolean, paramInt1, paramInt2, paramInt3, paramInt4);
-        if (this.mHeaderHeight == 0)
-            this.mHeaderHeight = this.mHeaderContainer.getHeight();
-        Log.i("etong","mHeaderHeight: "+mHeaderHeight);
-
+        if (mHeaderHeight == 0)
+            mHeaderHeight = mHeaderContainer.getHeight();
     }
 
     @Override
     public void onScroll(AbsListView paramAbsListView, int paramInt1,
                          int paramInt2, int paramInt3) {
-        Log.d("mmm", "onScroll");
-        if(this.mHeaderContainer!= null) {
-            float f = this.mHeaderHeight - this.mHeaderContainer.getBottom();
-            Log.d("mmm", "f|" + f);
-            if ((f > 0.0F) && (f < this.mHeaderHeight)) {
-                Log.d("mmm", "1");
+        if(mHeaderContainer!= null) {
+            float f = mHeaderHeight - mHeaderContainer.getBottom();
+            if ((f > 0.0F) && (f < mHeaderHeight)) {
                 int i = (int) (0.5D * f);
-                this.mHeaderContainer.scrollTo(0, -i);
-            } else if (this.mHeaderImage.getScrollY() != 0) {
-                Log.d("mmm", "2");
-                this.mHeaderImage.scrollTo(0, 0);
+                mHeaderContainer.scrollTo(0, -i);
+            } else if (mHeaderImage.getScrollY() != 0) {
+                mHeaderImage.scrollTo(0, 0);
             }
-            if (this.mOnScrollListener != null) {
-                this.mOnScrollListener.onScroll(paramAbsListView, paramInt1,
+            if (mOnScrollListener != null) {
+                mOnScrollListener.onScroll(paramAbsListView, paramInt1,
                         paramInt2, paramInt3);
             }
         }
     }
 
     public void onScrollStateChanged(AbsListView paramAbsListView, int paramInt) {
-        if (this.mOnScrollListener != null)
-            this.mOnScrollListener.onScrollStateChanged(paramAbsListView,
+        if (mOnScrollListener != null)
+            mOnScrollListener.onScrollStateChanged(paramAbsListView,
                     paramInt);
     }
 
-    public boolean onTouchEvent(MotionEvent paramMotionEvent) {
-        Log.d("mmm", "" + (0xFF & paramMotionEvent.getAction()));
-        switch (0xFF & paramMotionEvent.getAction()) {
+    public boolean onTouchEvent(MotionEvent me) {
+        switch (me.getAction()) {
             case 4:
-            case 0:
-                if (!this.mScalingRunnalable.mIsFinished) {
-                    this.mScalingRunnalable.abortAnimation();
+            case MotionEvent.ACTION_DOWN:
+                if (!mScalingRunnalable.mIsFinished) {
+                    mScalingRunnalable.abortAnimation();
                 }
-                this.mLastMotionY = paramMotionEvent.getY();
-                this.mActivePointerId = paramMotionEvent.getPointerId(0);
-                this.mMaxScale = (this.mScreenHeight / this.mHeaderHeight);
-                this.mLastScale = (this.mHeaderContainer.getBottom() / this.mHeaderHeight);
+                mLastMotionY = me.getY();
+                mActivePointerId = me.getPointerId(0);
+                mMaxScale = (float)mScreenHeight / (float)mHeaderHeight;
+                mLastScale = (float)mHeaderContainer.getBottom() /(float)mHeaderHeight;
                 break;
-            case 2:
-                Log.d("mmm", "mActivePointerId" + mActivePointerId);
-                int j = paramMotionEvent.findPointerIndex(this.mActivePointerId);
+            case MotionEvent.ACTION_MOVE:
+                int j = me.findPointerIndex(mActivePointerId);
                 if (j == -1) {
-                    Log.e("PullToZoomListView", "Invalid pointerId="
-                            + this.mActivePointerId + " in onTouchEvent");
                 } else {
-                    if (this.mLastMotionY == -1.0F)
-                        this.mLastMotionY = paramMotionEvent.getY(j);
-//                    if (this.mHeaderContainer.getBottom() >= this.mHeaderHeight) {
-//                        ViewGroup.LayoutParams localLayoutParams = this.mHeaderContainer
-//                                .getLayoutParams();
-//                        float f = ((paramMotionEvent.getY(j) - this.mLastMotionY + this.mHeaderContainer
-//                                .getBottom()) / this.mHeaderHeight - this.mLastScale)
-//                                / 2.0F + this.mLastScale;
-//                        if ((this.mLastScale <= 1.0D) && (f < this.mLastScale)) {
-//                            localLayoutParams.height = this.mHeaderHeight;
-//                            this.mHeaderContainer
-//                                    .setLayoutParams(localLayoutParams);
-//                            return super.onTouchEvent(paramMotionEvent);
-//                        }
-//                        this.mLastScale = Math.min(Math.max(f, 1.0F),
-//                                this.mMaxScale);
-//                        localLayoutParams.height = ((int) (this.mHeaderHeight * this.mLastScale));
-//                        if (localLayoutParams.height < this.mScreenHeight)
-//                            this.mHeaderContainer
-//                                    .setLayoutParams(localLayoutParams);
-//                        this.mLastMotionY = paramMotionEvent.getY(j);
-//                        return true;
-//                    }
-                    if(this.mHeaderContainer.getBottom() >= this.mHeaderHeight){
-                        ViewGroup.LayoutParams localLayoutParams = this.mHeaderContainer
+                    if (mLastMotionY == -1.0F)
+                        mLastMotionY = me.getY(j);
+                    if (mHeaderContainer.getBottom() >= mHeaderHeight) {
+                        ViewGroup.LayoutParams localLayoutParams = mHeaderContainer
                                 .getLayoutParams();
-                        Log.i("etong","height: "+localLayoutParams.height);
-                        localLayoutParams.height = mHeaderContainer.getHeight()+(int)(paramMotionEvent.getY()-mLastMotionY);
-
-                        if (localLayoutParams.height < 600)
-                            this.mHeaderContainer
+                        float f = ((me.getY(j) - mLastMotionY + mHeaderContainer
+                                .getBottom()) / mHeaderHeight - mLastScale)
+                                / 2.0F + mLastScale;
+                        if ((mLastScale <= 1.0D) && (f < mLastScale)) {
+                            localLayoutParams.height = mHeaderHeight;
+                            mHeaderContainer
                                     .setLayoutParams(localLayoutParams);
-                        this.mLastMotionY = paramMotionEvent.getY(j);
+                            return super.onTouchEvent(me);
+                        }
+                        mLastScale = Math.min(Math.max(f, 1.0F),
+                                mMaxScale);
+                        localLayoutParams.height = ((int) (mHeaderHeight * mLastScale));
+                        if (localLayoutParams.height < mScreenHeight)
+                            mHeaderContainer
+                                    .setLayoutParams(localLayoutParams);
+                        mLastMotionY = me.getY(j);
                         return true;
                     }
-                    this.mLastMotionY = paramMotionEvent.getY(j);
+                    mLastMotionY = me.getY(j);
                 }
                 break;
-            case 1:
+            case MotionEvent.ACTION_UP:
                 reset();
                 endScraling();
                 break;
-            case 3:
-                int i = paramMotionEvent.getActionIndex();
-                this.mLastMotionY = paramMotionEvent.getY(i);
-                this.mActivePointerId = paramMotionEvent.getPointerId(i);
+            case MotionEvent.ACTION_CANCEL:
+                int i = me.getActionIndex();
+                mLastMotionY = me.getY(i);
+                mActivePointerId = me.getPointerId(i);
                 break;
-            case 5:
-                onSecondaryPointerUp(paramMotionEvent);
-                this.mLastMotionY = paramMotionEvent.getY(paramMotionEvent
-                        .findPointerIndex(this.mActivePointerId));
+            case MotionEvent.ACTION_POINTER_DOWN:
+                onSecondaryPointerUp(me);
+                mLastMotionY = me.getY(me
+                        .findPointerIndex(mActivePointerId));
                 break;
             case 6:
         }
-        return super.onTouchEvent(paramMotionEvent);
+        return super.onTouchEvent(me);
     }
 
     public void setHeaderViewSize(int paramInt1, int paramInt2) {
-        Object localObject = this.mHeaderContainer.getLayoutParams();
+        Object localObject = mHeaderContainer.getLayoutParams();
         if (localObject == null)
             localObject = new AbsListView.LayoutParams(paramInt1, paramInt2);
         ((ViewGroup.LayoutParams) localObject).width = paramInt1;
         ((ViewGroup.LayoutParams) localObject).height = paramInt2;
-        this.mHeaderContainer
+        mHeaderContainer
                 .setLayoutParams((ViewGroup.LayoutParams) localObject);
-        this.mHeaderHeight = paramInt2;
+        mHeaderHeight = paramInt2;
     }
 
     public void setOnScrollListener(
             AbsListView.OnScrollListener paramOnScrollListener) {
-        this.mOnScrollListener = paramOnScrollListener;
+        mOnScrollListener = paramOnScrollListener;
     }
 
     public void setShadow(int paramInt) {
-        this.mShadow.setBackgroundResource(paramInt);
+        mShadow.setBackgroundResource(paramInt);
     }
 
     class ScalingRunnalable implements Runnable {
@@ -271,20 +249,20 @@ public class LollipopView extends ListView implements
         }
 
         public void abortAnimation() {
-            this.mIsFinished = true;
+            mIsFinished = true;
         }
 
         public boolean isFinished() {
-            return this.mIsFinished;
+            return mIsFinished;
         }
 
         public void run() {
             float f2;
             ViewGroup.LayoutParams localLayoutParams;
-            if ((!this.mIsFinished) && (this.mScale > 1.0D)) {
-                float f1 = ((float) SystemClock.currentThreadTimeMillis() - (float) this.mStartTime)
-                        / (float) this.mDuration;
-                f2 = this.mScale - (this.mScale - 1.0F)
+            if ((!mIsFinished) && (mScale > 1.0D)) {
+                float f1 = ((float) SystemClock.currentThreadTimeMillis() - (float) mStartTime)
+                        / (float) mDuration;
+                f2 = mScale - (mScale - 1.0F)
                         * LollipopView.sInterpolator.getInterpolation(f1);
                 localLayoutParams = LollipopView.this.mHeaderContainer
                         .getLayoutParams();
@@ -298,16 +276,16 @@ public class LollipopView extends ListView implements
                     LollipopView.this.post(this);
                     return;
                 }
-                this.mIsFinished = true;
+                mIsFinished = true;
             }
         }
 
         public void startAnimation(long paramLong) {
-            this.mStartTime = SystemClock.currentThreadTimeMillis();
-            this.mDuration = paramLong;
-            this.mScale = ((float) (LollipopView.this.mHeaderContainer
+            mStartTime = SystemClock.currentThreadTimeMillis();
+            mDuration = paramLong;
+            mScale = ((float) (LollipopView.this.mHeaderContainer
                     .getBottom()) / LollipopView.this.mHeaderHeight);
-            this.mIsFinished = false;
+            mIsFinished = false;
             LollipopView.this.post(this);
         }
     }
