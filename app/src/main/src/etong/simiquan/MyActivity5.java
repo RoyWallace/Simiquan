@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -92,7 +93,15 @@ public class MyActivity5 extends Activity {
         int padding = getResources().getDimensionPixelOffset(R.dimen.normal_padding);
         //设置标题栏布局
         titleView = new ImageView(this);
-        //列表头布局
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(480,100);
+        titleView.setLayoutParams(layoutParams);
+        titleView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("etong","titleView size: "+titleView.getHeight());
+            }
+        });
+        //列表头s布局
         headView = (RelativeLayout) inflater.inflate(R.layout.head_view,null);
         //头布局图片控件
         backgroundView = (ImageView)headView.findViewById(R.id.backgroundImageView);
@@ -100,10 +109,27 @@ public class MyActivity5 extends Activity {
         textView = (TextView) headView.findViewById(R.id.textView);
 
         listView = (PullToZoomListView) findViewById(R.id.listView);
-        //初始化头布局,设置headview高度，
-        listView.setHeadView(headView, backgroundView,textView, titleView,(int)(300*density), (int)(50*density));
+        //初始化头布局,设置headview高度，TitleView高度
+        listView.setHeadView(headView,(int)(300*density), (int)(50*density));
 
         listView.setHeadViewImageRes(imageId);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.i("etong","itemClick");
+                if(listView.isClickable()&&i == 0) {
+                    Log.i("etong", "click  " + i);
+                }
+            }
+        });
+
+//        listView.getHeadView().setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.i("etong","titleView size: "+titleView.getHeight());
+//            }
+//        });
 
         editText = (EditText) findViewById(R.id.editText);
 
@@ -290,25 +316,6 @@ public class MyActivity5 extends Activity {
         animatorSet.setDuration(200);
         animatorSet.start();
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.my_activity2, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public class ViewWrapper {

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -45,6 +46,12 @@ public class PullToZoomListView extends ListView implements
     private int mScreenWidth;
     private ImageView mShadow;
     private int mTitleViewHeight;
+    private boolean clickable=true;
+
+    public boolean isClickable(){
+        return clickable;
+    }
+
 
     public PullToZoomListView(Context paramContext) {
         super(paramContext);
@@ -70,21 +77,19 @@ public class PullToZoomListView extends ListView implements
     /**
      * 设置头布局，背景图片布局，文字布局，标题栏布局，头布局高度，标题栏布局高度
      * @param headView
-     * @param backgroundView
-     * @param textView
      * @param height
      * @param titleViewHeight
      */
-    public void setHeadView(RelativeLayout headView,ImageView backgroundView,TextView textView,ImageView titleView,int height,int titleViewHeight){
+    public void setHeadView(RelativeLayout headView,int height,int titleViewHeight){
         this.mHeadView = headView;
-        this.mBackgroundView = backgroundView;
-        this.mTextView = textView;
         this.mHeaderHeight = height;
-//        this.mHeaderImageCloner = titleView;
         this.mTitleViewHeight = titleViewHeight;
         setHeaderViewSize(height);
-//        setTitleViewSize(titleViewHeight);
         addHeaderView(headView);
+    }
+
+    public RelativeLayout getHeadView(){
+        return mHeadView;
     }
 
     private void endScraling() {
@@ -101,27 +106,6 @@ public class PullToZoomListView extends ListView implements
         mScalingRunnalable = new ScalingRunnalable();
         super.setOnScrollListener(this);
     }
-
-//    private void init(Context paramContext) {
-//        DisplayMetrics localDisplayMetrics = new DisplayMetrics();
-//        ((Activity) paramContext).getWindowManager().getDefaultDisplay()
-//                .getMetrics(localDisplayMetrics);
-//        mScreenHeight = localDisplayMetrics.heightPixels;
-//        mScreenWidth = localDisplayMetrics.widthPixels;
-//        mHeadView = new FrameLayout(paramContext);
-//        mHeaderImage = new ImageView(paramContext);
-//        setHeaderViewSize(mScreenWidth, 450);
-//        mShadow = new ImageView(paramContext);
-//        FrameLayout.LayoutParams localLayoutParams = new FrameLayout.LayoutParams(
-//                -1, -2);
-//        localLayoutParams.gravity = 80;
-//        mShadow.setLayoutParams(localLayoutParams);
-//        mHeadView.addView(mHeaderImage);
-//        mHeadView.addView(mShadow);
-//        addHeaderView(mHeadView);
-//        mScalingRunnalable = new ScalingRunnalable();
-//        super.setOnScrollListener(this);
-//    }
 
     private void onSecondaryPointerUp(MotionEvent me) {
         int i = (me.getAction()) >> 8;
@@ -250,6 +234,11 @@ public class PullToZoomListView extends ListView implements
                 }
                 break;
             case MotionEvent.ACTION_UP:
+                if(mHeadView.getBottom() > mHeaderHeight){
+                    clickable = false;
+                }else{
+                    clickable = true;
+                }
                 reset();
                 endScraling();
                 break;
@@ -334,7 +323,6 @@ public class PullToZoomListView extends ListView implements
                         .getLayoutParams();
                 if (f2 > 1.0F) {
                     localLayoutParams.height = PullToZoomListView.this.mHeaderHeight;
-                    ;
                     localLayoutParams.height = ((int) (f2 * PullToZoomListView.this.mHeaderHeight));
                     PullToZoomListView.this.mHeadView
                             .setLayoutParams(localLayoutParams);

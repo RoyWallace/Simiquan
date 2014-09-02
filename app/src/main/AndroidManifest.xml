@@ -17,19 +17,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MyActivity2"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".MyActivity3"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".MyActivity4"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:windowSoftInputMode="adjustResize" >
-        </activity>
-        <activity
             android:name=".MyActivity5"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="adjustPan" >
