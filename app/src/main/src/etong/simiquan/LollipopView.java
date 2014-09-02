@@ -35,7 +35,7 @@ public class LollipopView extends ListView implements
     float mLastMotionY = -1.0F;
     float mLastScale = -1.0F;
     float mMaxScale = -1.0F;
-    private AbsListView.OnScrollListener mOnScrollListener;
+    private OnScrollListener mOnScrollListener;
     private ScalingRunnalable mScalingRunnalable;
     private int mScreenHeight;
     private ImageView mShadow;
@@ -221,7 +221,7 @@ public class LollipopView extends ListView implements
     public void setHeaderViewSize(int paramInt1, int paramInt2) {
         Object localObject = mHeaderContainer.getLayoutParams();
         if (localObject == null)
-            localObject = new AbsListView.LayoutParams(paramInt1, paramInt2);
+            localObject = new LayoutParams(paramInt1, paramInt2);
         ((ViewGroup.LayoutParams) localObject).width = paramInt1;
         ((ViewGroup.LayoutParams) localObject).height = paramInt2;
         mHeaderContainer
@@ -230,7 +230,7 @@ public class LollipopView extends ListView implements
     }
 
     public void setOnScrollListener(
-            AbsListView.OnScrollListener paramOnScrollListener) {
+            OnScrollListener paramOnScrollListener) {
         mOnScrollListener = paramOnScrollListener;
     }
 

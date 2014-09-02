@@ -12,10 +12,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.linearlistview.LinearListView;
@@ -23,7 +25,7 @@ import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.animation.ObjectAnimator;
 
-public class MyActivity2 extends Activity {
+public class MyActivity4 extends Activity implements StickyLayout.OnGiveUpTouchEventListener {
 
     private View contentView;
 
@@ -31,7 +33,7 @@ public class MyActivity2 extends Activity {
 
     private EditText editText;
 
-    private LinearListView listView;
+    private ListView listView;
 
     private float density;
     int offsetY;
@@ -75,20 +77,20 @@ public class MyActivity2 extends Activity {
     public void findAllView() {
 
         LayoutInflater inflater = LayoutInflater.from(this);
-        contentView = inflater.inflate(R.layout.detail_activity, null);
+        contentView = inflater.inflate(R.layout.my4_activity, null);
         setContentView(contentView);
 
-        relayout = (RelativeLayout)findViewById(R.id.headView);
-        if(relayout == null) {
-            Log.i("etong", "relayout null ");
-        }
+//        relayout = (RelativeLayout)findViewById(R.id.headView);
+//        if(relayout == null) {
+//            Log.i("etong", "relayout null ");
+//        }
 
         ImageView imageView = (ImageView)findViewById(R.id.backgroundImageView);
         imageView.setImageResource(imageId);
-        listView = (LinearListView) findViewById(R.id.listView);
+        listView = (ListView) findViewById(R.id.listView);
 //        listView.addHeaderView(relayout);
 
-        editText = (EditText) findViewById(R.id.editText);
+//        editText = (EditText) findViewById(R.id.editText);
 
     }
 
@@ -113,13 +115,13 @@ public class MyActivity2 extends Activity {
 
     public void setAllListener() {
 
-        relayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("etong","click");
-                doEndAnim();
-            }
-        });
+//        relayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.i("etong","click");
+//                doEndAnim();
+//            }
+//        });
 
     }
 
@@ -292,6 +294,17 @@ public class MyActivity2 extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean giveUpTouchEvent(MotionEvent event) {
+        if (listView.getFirstVisiblePosition() == 0) {
+            View view = listView.getChildAt(0);
+            if (view != null && view.getTop() >= 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public class ViewWrapper {

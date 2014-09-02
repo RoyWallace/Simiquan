@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -34,7 +35,6 @@ public class MyActivity extends ActionBarActivity {
         setAllListener();
     }
 
-
     private void findAllView() {
         listView = (ListView) findViewById(R.id.listview);
 
@@ -44,7 +44,6 @@ public class MyActivity extends ActionBarActivity {
     	
     	for(int i=0;i<10;i++){
     		int num=(int)(Math.random()*(resIds.length));
-    		Log.i("etong", "num: "+num);
     		imageIdList.add(resIds[num]);
     	}
     	
@@ -56,7 +55,7 @@ public class MyActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Intent intent = new Intent(new Intent(MyActivity.this,MyActivity2.class));
+                Intent intent = new Intent(new Intent(MyActivity.this,MyActivity5.class));
                 int[] location = new int[2];
                 view.getLocationOnScreen(location);
                 intent.putExtra("offsetHeight", view.getHeight());
@@ -65,7 +64,7 @@ public class MyActivity extends ActionBarActivity {
                 intent.putExtra("imageId", imageIdList.get(i));
 
                 startActivity(intent);
-                overridePendingTransition(R.anim.nothing,R.anim.abc_slide_out_top);
+//                overridePendingTransition(R.anim.nothing,R.anim.abc_slide_out_top);
             }
         });
     }

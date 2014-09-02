@@ -50,7 +50,7 @@ public class MyAdapter extends BaseAdapter {
         if(view == null){
             holder = new ViewHolder();
             view = layoutInflater.inflate(R.layout.list_item,null);
-            holder.imageView = (ImageView) view.findViewById(R.id.imageView);
+            holder.imageView = (ImageView) view.findViewById(R.id.backgroundImageView);
             view.setTag(holder);
         }else{
             holder = (ViewHolder) view.getTag();
