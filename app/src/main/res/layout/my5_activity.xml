@@ -22,6 +22,7 @@
         android:id="@+id/editText"
         android:background="#d6d6d6"
         android:hint="请输入评论"
+        android:visibility="gone"
         android:layout_alignParentBottom="true"/>
 
 

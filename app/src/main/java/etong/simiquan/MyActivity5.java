@@ -7,6 +7,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -91,17 +92,7 @@ public class MyActivity5 extends Activity {
         //采用头布局和列表布局分离的写法，方便头布局直接在activity里直接获得和修改。
         //
         int padding = getResources().getDimensionPixelOffset(R.dimen.normal_padding);
-        //设置标题栏布局
-        titleView = new ImageView(this);
-        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(480,100);
-        titleView.setLayoutParams(layoutParams);
-        titleView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("etong","titleView size: "+titleView.getHeight());
-            }
-        });
-        //列表头s布局
+        //列表头布局
         headView = (RelativeLayout) inflater.inflate(R.layout.head_view,null);
         //头布局图片控件
         backgroundView = (ImageView)headView.findViewById(R.id.backgroundImageView);
@@ -110,10 +101,11 @@ public class MyActivity5 extends Activity {
 
         listView = (PullToZoomListView) findViewById(R.id.listView);
         //初始化头布局,设置headview高度，TitleView高度
-        listView.setHeadView(headView,(int)(300*density), (int)(50*density));
+        listView.setHeadView(headView,(int)(300*density)+padding, (int)(50*density));
 
         listView.setHeadViewImageRes(imageId);
 
+        //headView点击事件处理
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -124,12 +116,23 @@ public class MyActivity5 extends Activity {
             }
         });
 
-//        listView.getHeadView().setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Log.i("etong","titleView size: "+titleView.getHeight());
-//            }
-//        });
+        //titleView 点击监听
+        listView.setOnTittleViewClickListener(new PullToZoomListView.OnTitleViewClickListener() {
+            @Override
+            public void onClick() {
+
+            }
+        });
+
+        //改变文字颜色回调
+        listView.setChangeTextAlpha(new PullToZoomListView.ChangeTextAlpha() {
+            @Override
+            public void onChange(float a) {
+                Log.i("etong","a: "+a);
+                textView.setTextColor(Color.argb((int)(a*255),255,255,255));
+            }
+        });
+
 
         editText = (EditText) findViewById(R.id.editText);
 
@@ -204,81 +207,6 @@ public class MyActivity5 extends Activity {
         animatorSet.start();
 
     }
-
-//    private void doStartAnim() {
-//        Animation anim = new TranslateAnimation(0, 0, offsetY
-//                - getStatuBarHeight(), 0);
-//        anim.setDuration(200);
-//        contentView.setAnimation(anim);
-//        // ObjectAnimator translateAnim = ObjectAnimator.ofInt(contentView,
-//        // "translationY", offsetY-getStatuBarHeight()+4, 0);
-//        // translateAnim.setDuration(200);
-//        // ObjectAnimator commentAnim = null;
-//
-//        if (animType.equals("fade")) {
-//
-//            // commentAnim = ObjectAnimator.ofFloat(listView, "alpha",1);
-//            Animation fadeAnim = AnimationUtils.loadAnimation(this,
-//                    R.anim.abc_fade_in);
-//            fadeAnim.setDuration(200);
-//            listView.startAnimation(fadeAnim);
-//        } else if (animType.equals("zoom")) {
-//            ViewWrapper viewWrapper = new ViewWrapper(contentView);
-//            ObjectAnimator commentAnim = ObjectAnimator.ofInt(viewWrapper,
-//                    "height", offsetHeight, getContentViewHeight());
-//            commentAnim.setDuration(200);
-//            commentAnim.start();
-//        }
-//
-//        // AnimatorSet animatorSet = new AnimatorSet();
-//        // animatorSet.playTogether(translateAnim,commentAnim);
-//        // animatorSet.setDuration(200);
-//        // animatorSet.start();
-//
-//    }
-
-//	private void doEndAnim() {
-//		Log.i("etong", "offsetY" + offsetY);
-//		Animation anim = new TranslateAnimation(0, 0, 0, offsetY
-//				- getStatuBarHeight() + 4);
-//		anim.setDuration(200);
-//		contentView.startAnimation(anim);
-//
-//		anim.setAnimationListener(new Animation.AnimationListener() {
-//			@Override
-//			public void onAnimationStart(Animation animation) {
-//				editText.setVisibility(View.GONE);
-//			}
-//
-//			@Override
-//			public void onAnimationEnd(Animation animation) {
-//				contentView.setVisibility(View.INVISIBLE);
-//				finish();
-//			}
-//
-//			@Override
-//			public void onAnimationRepeat(Animation animation) {
-//
-//			}
-//		});
-//
-//		Log.i("etong", "type: " + animType);
-//		if (animType.equals("fade")) {
-//			Log.i("etong", "fade");
-//			Animation fadeAnim = AnimationUtils.loadAnimation(this,
-//					R.anim.abc_fade_out);
-//			fadeAnim.setDuration(500);
-//			listView.startAnimation(fadeAnim);
-//		} else if (animType.equals("zoom")) {
-//			Log.i("etong", "zoom");
-//			ViewWrapper viewWrapper = new ViewWrapper(contentView);
-//			ObjectAnimator objectAnimator = ObjectAnimator.ofInt(viewWrapper,
-//					"height", offsetHeight);
-//			objectAnimator.setDuration(150);
-//			objectAnimator.start();
-//		}
-//
-//	}
 
     private void doEndAnim() {
 

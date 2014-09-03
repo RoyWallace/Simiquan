@@ -3,6 +3,7 @@ package etong.simiquan;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -155,7 +156,7 @@ public class PullToZoomListView extends ListView implements
             mHeaderImageCloner = new ImageView(getContext());
             mHeaderImageCloner.setScaleType(ImageView.ScaleType.CENTER_CROP);
             Log.i("etong","mTitleViewHeight:　"+mTitleViewHeight);
-            mHeaderImageCloner.layout(padding, 0, mHeadView.getWidth()-padding, mTitleViewHeight-padding);
+            mHeaderImageCloner.layout(padding, 0, mHeadView.getWidth()-padding, mTitleViewHeight);
             mHeaderImageCloner.setImageResource(mImageRes);
         }
     }
@@ -164,6 +165,12 @@ public class PullToZoomListView extends ListView implements
     public void onScroll(AbsListView paramAbsListView, int paramInt1,
                          int paramInt2, int paramInt3) {
         if(mHeadView!= null) {
+            if(mHeadView.getBottom()>=0) {
+                float bh = (float) (mHeadView.getBottom() - mTitleViewHeight);
+                float ht = (float) (mHeaderHeight - mTitleViewHeight);
+                float a = bh<=ht?bh/ht:ht/bh;
+                mChangeTextAlpha.onChange(a);
+            }
             float f = mHeaderHeight - mHeadView.getBottom();
             if ((f > 0.0F) && (f < mHeaderHeight)) {
                 int i = (int) (0.5D * f);
@@ -202,6 +209,11 @@ public class PullToZoomListView extends ListView implements
                 mActivePointerId = me.getPointerId(0);
                 mMaxScale = (float)mScreenHeight / (float)mHeaderHeight;
                 mLastScale = (float)mHeadView.getBottom() / (float)mHeaderHeight;
+                if (mHeadView.getBottom() <= mTitleViewHeight){
+                    if(mListener!=null)
+                    mListener.onClick();
+                    return true;
+                }
                 break;
             case MotionEvent.ACTION_MOVE:
                 int j = me.findPointerIndex(mActivePointerId);
@@ -224,9 +236,10 @@ public class PullToZoomListView extends ListView implements
                         mLastScale = Math.min(Math.max(f, 1.0F),
                                 mMaxScale);
                         localLayoutParams.height = ((int) (mHeaderHeight * mLastScale));
-                        if (localLayoutParams.height < mScreenHeight)
+                        if (localLayoutParams.height < mScreenHeight) {
                             mHeadView
                                     .setLayoutParams(localLayoutParams);
+                        }
                         mLastMotionY = me.getY(j);
                         return true;
                     }
@@ -341,5 +354,25 @@ public class PullToZoomListView extends ListView implements
             mIsFinished = false;
             PullToZoomListView.this.post(this);
         }
+    }
+
+    private OnTitleViewClickListener mListener;
+
+    public void setOnTittleViewClickListener(OnTitleViewClickListener listener){
+        this.mListener = listener;
+    }
+
+    public interface OnTitleViewClickListener{
+        public void onClick();
+    }
+
+    private ChangeTextAlpha mChangeTextAlpha;
+
+    public void setChangeTextAlpha(ChangeTextAlpha c){
+        this.mChangeTextAlpha = c;
+    }
+
+    public interface ChangeTextAlpha{
+        public void onChange(float a);
     }
 }
