@@ -270,7 +270,6 @@ public class MyActivity5 extends Activity {
             view.getLayoutParams().height = height;
             view.requestLayout();
         }
-
     }
 
     @Override
