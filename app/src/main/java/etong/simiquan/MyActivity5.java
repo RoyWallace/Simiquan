@@ -217,6 +217,7 @@ public class MyActivity5 extends Activity {
     }
 
     private void doEndAnim() {
+        listView.smoothScrollToPosition(0);
 
         ObjectAnimator translateAnim = ObjectAnimator.ofFloat(contentView,
                 "translationY", 0, offsetY - getStatuBarHeight());
