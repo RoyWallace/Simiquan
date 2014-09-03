@@ -128,7 +128,8 @@ public class PullToZoomListView extends ListView implements
             if(mHeadView.getBottom()>=0) {
                 float bh = (float) (mHeadView.getBottom() - mTitleViewHeight);
                 float ht = (float) (mHeaderHeight - mTitleViewHeight);
-                float a = bh<=ht?bh/ht:ht/bh;
+                float sb = (float)(mScreenHeight-mHeadView.getBottom());
+                float a = bh<=ht?bh/ht:sb/bh;
                 mChangeTextAlpha.onChange(a);
             }
             if(mHeadView.getBottom()<=mTitleViewHeight){
