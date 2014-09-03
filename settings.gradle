@@ -1,1 +1,1 @@
-include ':linearlistview', ':app'
+include ':app'

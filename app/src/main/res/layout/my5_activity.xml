@@ -14,6 +14,16 @@
         android:divider="@null"
         android:layout_above="@+id/editText"/>
 
+    <ImageView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="@dimen/normal_padding"
+        android:paddingRight="@dimen/normal_padding"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop"
+        android:visibility="visible"/>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -22,8 +32,8 @@
         android:id="@+id/editText"
         android:background="#d6d6d6"
         android:hint="请输入评论"
-        android:visibility="gone"
         android:layout_alignParentBottom="true"/>
+
 
 
 </RelativeLayout>

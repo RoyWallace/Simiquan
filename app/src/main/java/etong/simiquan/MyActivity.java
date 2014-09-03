@@ -40,6 +40,10 @@ public class MyActivity extends ActionBarActivity {
 
     }
 
+    private void createCircleMenu(){
+        
+    }
+
     private void stowData(){
     	
     	for(int i=0;i<10;i++){

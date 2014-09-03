@@ -19,7 +19,7 @@
         <activity
             android:name=".MyActivity5"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustResize" >
         </activity>
     </application>
 

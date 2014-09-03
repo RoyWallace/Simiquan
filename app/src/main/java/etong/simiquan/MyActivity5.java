@@ -22,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.linearlistview.LinearListView;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.animation.ObjectAnimator;
@@ -84,7 +83,6 @@ public class MyActivity5 extends Activity {
 
     public void findAllView() {
 
-        Log.i("etong","findView");
         LayoutInflater inflater = LayoutInflater.from(this);
         contentView = inflater.inflate(R.layout.my5_activity, null);
         setContentView(contentView);
@@ -92,47 +90,18 @@ public class MyActivity5 extends Activity {
         //采用头布局和列表布局分离的写法，方便头布局直接在activity里直接获得和修改。
         //
         int padding = getResources().getDimensionPixelOffset(R.dimen.normal_padding);
+        titleView = (ImageView) findViewById(R.id.titleView);
+
         //列表头布局
-        headView = (RelativeLayout) inflater.inflate(R.layout.head_view,null);
+        headView = (RelativeLayout) inflater.inflate(R.layout.head_view, null);
         //头布局图片控件
-        backgroundView = (ImageView)headView.findViewById(R.id.backgroundImageView);
+        backgroundView = (ImageView) headView.findViewById(R.id.backgroundImageView);
         //头布局文字显示控件
         textView = (TextView) headView.findViewById(R.id.textView);
 
         listView = (PullToZoomListView) findViewById(R.id.listView);
         //初始化头布局,设置headview高度，TitleView高度
-        listView.setHeadView(headView,(int)(300*density)+padding, (int)(50*density));
-
-        listView.setHeadViewImageRes(imageId);
-
-        //headView点击事件处理
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.i("etong","itemClick");
-                if(listView.isClickable()&&i == 0) {
-                    Log.i("etong", "click  " + i);
-                }
-            }
-        });
-
-        //titleView 点击监听
-        listView.setOnTittleViewClickListener(new PullToZoomListView.OnTitleViewClickListener() {
-            @Override
-            public void onClick() {
-
-            }
-        });
-
-        //改变文字颜色回调
-        listView.setChangeTextAlpha(new PullToZoomListView.ChangeTextAlpha() {
-            @Override
-            public void onChange(float a) {
-                Log.i("etong","a: "+a);
-                textView.setTextColor(Color.argb((int)(a*255),255,255,255));
-            }
-        });
-
+        listView.setHeadView(headView, (int) (300 * density) + padding, (int) (50 * density));
 
         editText = (EditText) findViewById(R.id.editText);
 
@@ -155,8 +124,8 @@ public class MyActivity5 extends Activity {
 
         //设置头布局背景图片
         backgroundView.setImageResource(imageId);
-//        //设置标题栏背景图片
-//        titleView.setImageResource(imageId);
+        //设置标题栏背景图片
+        titleView.setImageResource(imageId);
 
         CommentAdapter commentAdapter = new CommentAdapter(this, strs);
         listView.setAdapter(commentAdapter);
@@ -165,7 +134,46 @@ public class MyActivity5 extends Activity {
 
     public void setAllListener() {
 
+        //titleView 显示监听
+        listView.setOnShowTitleViewListener(new PullToZoomListView.OnShowTitleViewListener() {
+            @Override
+            public void onShow() {
+                if(titleView.getVisibility()==View.GONE)
+                    titleView.setVisibility(View.VISIBLE);
+            }
+            @Override
+            public void onHide() {
+                if(titleView.getVisibility()==View.VISIBLE)
+                    titleView.setVisibility(View.GONE);
+            }
+        });
 
+        //titleView点击事件
+        titleView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listView.smoothScrollToPosition(0);
+            }
+        });
+
+        //headView点击事件处理
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.i("etong", "itemClick");
+                if (listView.isClickable() && i == 0) {
+                    Log.i("etong", "click  " + i);
+                }
+            }
+        });
+
+        //改变文字颜色回调
+        listView.setChangeTextAlpha(new PullToZoomListView.ChangeTextAlpha() {
+            @Override
+            public void onChange(float a) {
+                textView.setTextColor(Color.argb((int) (a * 255), 255, 255, 255));
+            }
+        });
 
     }
 
