@@ -12,8 +12,11 @@ Simiquan
 
 效果示例1
 
-
+![image](https://github.com/RoyWallace/Simiquan/blob/master/screenshots/demo1.gif)
 
 效果示例2
 
+![image](https://github.com/RoyWallace/Simiquan/blob/master/screenshots/demo2.gif)
 
+
+代码仅供参考，不得用于商业用途。
