@@ -5,19 +5,28 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.widget.ImageView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+
+import com.nineoldandroids.animation.Animator;
 
 
 public class MyActivity extends ActionBarActivity {
 
+    private CircleCanvasLayout contentView;
+
     private ListView listView;
+
+    private ImageView writeImageView;
     
     private String animType = "fade";
     
@@ -36,12 +45,14 @@ public class MyActivity extends ActionBarActivity {
     }
 
     private void findAllView() {
+        contentView = (CircleCanvasLayout) findViewById(R.id.contentView);
         listView = (ListView) findViewById(R.id.listview);
+        writeImageView = (ImageView) findViewById(R.id.writeImageView);
 
     }
 
     private void createCircleMenu(){
-        
+        FragmentManager fm = getSupportFragmentManager();
     }
 
     private void stowData(){
@@ -71,6 +82,45 @@ public class MyActivity extends ActionBarActivity {
 //                overridePendingTransition(R.anim.nothing,R.anim.abc_slide_out_top);
             }
         });
+
+        writeImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                final int cx = (writeImageView.getLeft()+writeImageView.getRight())/2;
+                final int cy = (writeImageView.getTop()+writeImageView.getBottom())/2;
+                contentView.setPaintColor(getResources().getColor(R.color.white));
+//                contentView.setMinRadius(writeImageView.getWidth());
+                contentView.setDrawAtBack(false);
+                contentView.setPosition(cx,cy);
+                contentView.setZoomInListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        Intent intent = new Intent(new Intent(MyActivity.this,PostMomentActivity.class));
+                        intent.putExtra("cx", cx);
+                        intent.putExtra("cy", cy);
+                        startActivityForResult(intent, 200);
+//                        overridePendingTransition(R.anim.nothing,R.anim.abc_slide_out_top);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+                contentView.ZoomIn();
+
+            }
+        });
     }
 
     @Override
@@ -96,5 +146,18 @@ public class MyActivity extends ActionBarActivity {
 //        	animType = (String) item.getTitle();
 //        }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        final int cx = (writeImageView.getLeft()+writeImageView.getRight())/2;
+        final int cy = (writeImageView.getTop()+writeImageView.getBottom())/2;
+        contentView.setPaintColor(getResources().getColor(R.color.white));
+//                contentView.setMinRadius(writeImageView.getWidth());
+        contentView.setDrawAtBack(false);
+        contentView.setOutDuration(200);
+        contentView.setPosition(cx,cy);
+        contentView.ZoomOut();
     }
 }

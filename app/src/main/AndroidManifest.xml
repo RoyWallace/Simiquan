@@ -21,6 +21,11 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="adjustResize" >
         </activity>
+        <activity
+            android:name=".PostMomentActivity"
+            android:label="@string/title_activity_post_moment"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
     </application>
 
 </manifest>

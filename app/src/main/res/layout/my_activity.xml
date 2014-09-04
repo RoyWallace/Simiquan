@@ -1,5 +1,6 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<etong.simiquan.CircleCanvasLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contentView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MyActivity">
@@ -12,4 +13,13 @@
         android:id="@+id/listview">
     </ListView>
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/writeImageView"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:padding="8dp"
+        android:src="@drawable/write"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
+
+</etong.simiquan.CircleCanvasLayout>

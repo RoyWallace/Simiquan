@@ -8,5 +8,6 @@
     <string name="title_activity_my_activity3">MyActivity3</string>
     <string name="title_activity_my4">My4Activity</string>
     <string name="title_activity_my_activity5">MyActivity5</string>
+    <string name="title_activity_post_moment">PostMoment</string>
 
 </resources>

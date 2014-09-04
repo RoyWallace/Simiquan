@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -172,6 +173,14 @@ public class MyActivity5 extends Activity {
             @Override
             public void onChange(float a) {
                 textView.setTextColor(Color.argb((int) (a * 255), 255, 255, 255));
+            }
+        });
+
+        headView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                Log.i("etong","headview ontouch");
+                return false;
             }
         });
 
