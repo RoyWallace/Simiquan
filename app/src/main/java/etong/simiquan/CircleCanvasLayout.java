@@ -266,18 +266,18 @@ public class CircleCanvasLayout extends RelativeLayout {
      * 放大
      */
     public void ZoomIn() {
-        inDuration = 5000;
-        ValueAnimator colorAnimator = ValueAnimator.ofInt(0, 255);
-        colorAnimator.setDuration(inDuration);
-        colorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                Integer value = (Integer) valueAnimator.getAnimatedValue();
-                paint.setColor(Color.argb(255,255,255-value,255-value));
-                invalidate();
-            }
-        });
-        colorAnimator.start();
+//        inDuration = 5000;
+//        ValueAnimator colorAnimator = ValueAnimator.ofInt(0, 255);
+//        colorAnimator.setDuration(inDuration);
+//        colorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//            @Override
+//            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+//                Integer value = (Integer) valueAnimator.getAnimatedValue();
+//                paint.setColor(Color.argb(255,255,255-value,255-value));
+//                invalidate();
+//            }
+//        });
+//        colorAnimator.start();
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(minRadius, maxRadius);
         valueAnimator.setDuration(inDuration);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
