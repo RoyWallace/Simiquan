@@ -165,7 +165,7 @@ public class MyActivity extends ActionBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
-            final int toPosition =1;
+            final int toPosition =5;
             final int position = data.getIntExtra("position", 0);
             final int imageId = data.getIntExtra("imageId",R.drawable.tu2);
             listView.move(position, toPosition);
