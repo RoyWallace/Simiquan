@@ -5,16 +5,19 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.nhaarman.listviewanimations.util.Insertable;
+
 /**
  * Created by Administrator on 2014/8/28.
  */
-public class MyAdapter extends BaseAdapter {
+public class MyAdapter extends BaseAdapter implements Insertable {
 
     private Context context;
     
@@ -57,6 +60,10 @@ public class MyAdapter extends BaseAdapter {
         }
         holder.imageView.setImageResource(imageIdList.get(i));
         return view;
+    }
+
+    @Override
+    public void add(int i, @NonNull Object o) {
     }
 
     class ViewHolder{

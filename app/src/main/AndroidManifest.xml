@@ -24,7 +24,11 @@
         <activity
             android:name=".PostMomentActivity"
             android:label="@string/title_activity_post_moment"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".NewMsgActivity"
+            android:label="@string/title_activity_new_msg" >
         </activity>
     </application>
 

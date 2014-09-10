@@ -4,7 +4,8 @@ int anim abc_slide_in_bottom 0x7f040002
 int anim abc_slide_in_top 0x7f040003
 int anim abc_slide_out_bottom 0x7f040004
 int anim abc_slide_out_top 0x7f040005
-int anim nothing 0x7f040006
+int anim coloranimation 0x7f040006
+int anim nothing 0x7f040007
 int array test 0x7f0c0000
 int attr actionBarDivider 0x7f01000b
 int attr actionBarItemBackground 0x7f01000c

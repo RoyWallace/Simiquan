@@ -47,6 +47,8 @@ public class MyActivity5 extends Activity {
     int offsetY;
     int offsetHeight;
 
+    int position;
+
     int imageId;
 
     private String animType;
@@ -79,6 +81,7 @@ public class MyActivity5 extends Activity {
         offsetHeight = intent.getIntExtra("offsetHeight", 0);
         offsetY = intent.getIntExtra("offsetY", 0);
         animType = intent.getStringExtra("animType");
+        position = intent.getIntExtra("position",0);
         imageId = intent.getIntExtra("imageId", R.drawable.tu2);
     }
 
@@ -245,6 +248,10 @@ public class MyActivity5 extends Activity {
             @Override
             public void onAnimationEnd(Animator arg0) {
                 contentView.setVisibility(View.INVISIBLE);
+                Intent intent = new Intent();
+                intent.putExtra("position",position);
+                intent.putExtra("imageId",imageId);
+                setResult(200,intent);
                 finish();
             }
 

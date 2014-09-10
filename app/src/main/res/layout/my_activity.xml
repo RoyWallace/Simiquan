@@ -5,13 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".MyActivity">
 
-    <ListView
+    <etong.simiquan.ASListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fadingEdge="none"
         android:divider="@null"
-        android:id="@+id/listview">
-    </ListView>
+        android:id="@+id/listview"/>
 
     <ImageView
         android:id="@+id/writeImageView"
