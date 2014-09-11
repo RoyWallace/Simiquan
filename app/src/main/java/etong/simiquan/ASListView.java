@@ -84,7 +84,8 @@ public class ASListView extends ListView {
         //隐藏移动对象，用镜像代替移动
         view.setVisibility(View.INVISIBLE);
 
-        ObjectAnimator moveAnimator = ObjectAnimator.ofFloat(moveImageView, "translationY", view.getTop(), view.getBottom() * (toPosition - fromPosition));
+        int translationY = view.getBottom() + ((toPosition - fromPosition - 1) * view.getHeight()) - view.getTop();
+        ObjectAnimator moveAnimator = ObjectAnimator.ofFloat(moveImageView, "translationY", translationY);
         ViewWrapper viewWrapper = new ViewWrapper(view);
         ObjectAnimator heightAnimator = ObjectAnimator.ofInt(viewWrapper, "height", view.getHeight(), 0);
 
