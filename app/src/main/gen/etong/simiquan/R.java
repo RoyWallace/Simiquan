@@ -1134,13 +1134,15 @@ containing a value of this type.
         public static final int list_item=0x7f030019;
         public static final int my5_activity=0x7f03001a;
         public static final int my_activity=0x7f03001b;
-        public static final int post_moment_activity=0x7f03001c;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001d;
+        public static final int new_msg_activity=0x7f03001c;
+        public static final int post_moment_activity=0x7f03001d;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001e;
     }
     public static final class menu {
         public static final int my=0x7f0d0000;
         public static final int my_activity5=0x7f0d0001;
-        public static final int post_moment=0x7f0d0002;
+        public static final int new_msg=0x7f0d0002;
+        public static final int post_moment=0x7f0d0003;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1190,6 +1192,7 @@ containing a value of this type.
         public static final int title_activity_my_activity2=0x7f0a0010;
         public static final int title_activity_my_activity3=0x7f0a0011;
         public static final int title_activity_my_activity5=0x7f0a0013;
+        public static final int title_activity_new_msg=0x7f0a0015;
         public static final int title_activity_post_moment=0x7f0a0014;
     }
     public static final class style {
